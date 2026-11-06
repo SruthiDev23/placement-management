@@ -1,0 +1,14 @@
+{% extends "base.html" %}{% block title %}Admin Dashboard{% endblock %}
+{% block content %}
+<div class="d-flex flex-wrap justify-content-between align-items-center mb-4"><div><h2 class="fw-bold mb-1">Admin Dashboard</h2><p class="text-muted mb-0">Manage students, companies and placement activity.</p></div></div>
+<div class="row g-3 mb-4">
+{% for label,value in [('Total Students',students_count),('Companies',companies_count),('Applications',applications_count),('Selected',selected_count)] %}
+<div class="col-sm-6 col-xl-3"><div class="stat-card"><div class="text-muted">{{ label }}</div><div class="stat-number">{{ value }}</div></div></div>
+{% endfor %}
+</div>
+<div class="row g-3">
+<div class="col-md-4"><a class="nav-card" href="{{ url_for('students') }}"><span>👩‍🎓</span><b>Manage Students</b><small>Add and view student records</small></a></div>
+<div class="col-md-4"><a class="nav-card" href="{{ url_for('companies') }}"><span>🏢</span><b>Manage Companies</b><small>Add placement opportunities</small></a></div>
+<div class="col-md-4"><a class="nav-card" href="{{ url_for('applications') }}"><span>📋</span><b>Applications</b><small>Review and update status</small></a></div>
+</div>
+{% endblock %}

@@ -1,0 +1,9 @@
+{% extends "base.html" %}{% block title %}Student Portal{% endblock %}
+{% block content %}
+<div class="mb-4"><h2 class="fw-bold">Welcome, {{ student.name }}</h2><p class="text-muted mb-0">Your student placement portal.</p></div>
+<div class="row g-3 mb-4"><div class="col-md-4"><div class="stat-card"><div class="text-muted">Roll Number</div><div class="stat-number fs-4">{{ student.roll_no }}</div></div></div><div class="col-md-4"><div class="stat-card"><div class="text-muted">Branch</div><div class="stat-number fs-4">{{ student.branch }}</div></div></div><div class="col-md-4"><div class="stat-card"><div class="text-muted">CGPA</div><div class="stat-number fs-4">{{ student.cgpa }}</div></div></div></div>
+<div class="d-flex justify-content-between align-items-center mb-3"><h4 class="fw-bold">Available Opportunities</h4><a class="btn btn-outline-primary" href="{{ url_for('applications') }}">My Applications</a></div>
+<div class="row g-3">{% for c in companies %}<div class="col-md-6 col-xl-4"><div class="card h-100 form-card"><div class="card-body"><h5 class="fw-bold">{{ c.company_name }}</h5><div class="text-primary">{{ c.job_role }}</div><p class="text-muted small mt-2">Package: {{ c.package }}<br>Minimum CGPA: {{ c.eligibility_cgpa }}<br>Drive date: {{ c.drive_date }}</p>
+{% if c.application_id %}<span class="badge text-bg-success">Applied · {{ c.status }}</span>{% else %}<form method="post" action="{{ url_for('apply', company_id=c.company_id) }}"><button class="btn btn-primary btn-sm">Apply Now</button></form>{% endif %}
+</div></div></div>{% else %}<p class="text-muted">No opportunities have been added yet.</p>{% endfor %}</div>
+{% endblock %}
